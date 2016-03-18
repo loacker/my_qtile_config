@@ -17,15 +17,24 @@ keys = [
     Key([mod], "h", lazy.layout.previous()),
     Key([mod], "l", lazy.layout.next()),
 
+    # MonadTall layout
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "h", lazy.layout.swap_left()),
+    Key([mod, "shift"], "l", lazy.layout.swap_right()),
+    Key([mod], "i", lazy.layout.grow()),
+    Key([mod], "o", lazy.layout.shrink()),
+    Key([mod, "shift"], "space", lazy.layout.flip()),
+
     # Move windows up or down in current stack
     Key([mod, "shift"], "k", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "j", lazy.layout.shuffle_up()),
 
     # Move windows from stack to stack
-    Key([mod, "shift"], "l", lazy.layout.client_to_next()),
-    Key([mod, "shift"], "h", lazy.layout.client_to_previous()),
+    #Key([mod, "shift"], "l", lazy.layout.client_to_next()),
+    #Key([mod, "shift"], "h", lazy.layout.client_to_previous()),
 
-    # Vertical layout
+    # Vertical and MonadTall layout
     Key([mod], 'm', lazy.layout.maximize()),
     Key([mod], 'n', lazy.layout.normalize()),
 
@@ -37,9 +46,11 @@ keys = [
 
     # Toggle floating
     Key([mod], "t", lazy.window.toggle_floating()),
+
+    # Toggle full screen
     Key([mod], "f", lazy.window.toggle_fullscreen()),
 
-    # this is usefull when floating windows get buried
+    # This should be usefull when floating windows get buried
     Key([alt], "grave", lazy.window.bring_to_front()),
 
     # Toggle between split and unsplit sides of stack.
@@ -79,8 +90,8 @@ keys = [
     Key([alt], "g", lazy.spawn("chromium")),
     Key([alt], "s", lazy.spawn("skype")),
     Key([alt], "m", lazy.spawn("thunderbird-bin")),
-    Key([alt, "shift"], printkey, lazy.spawn("scrot -sb '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_selection.png' -e 'mv $f ~/pictures/screenshots'")),
-    Key([alt], printkey, lazy.spawn("scrot -ub '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_window.png' -e 'mv $f ~/pictures/screenshots'")),
+    Key([alt], printkey, lazy.spawn("scrot -sb '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_selection.png' -e 'mv $f ~/pictures/screenshots'")),
+    Key([mod], printkey, lazy.spawn("scrot -ub '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_window.png' -e 'mv $f ~/pictures/screenshots'")),
 ]
 
 #groups = [Group(i) for i in "123456890"]
@@ -120,7 +131,7 @@ layouts = [
     layout.Max(),
     layout.VerticalTile(),
     layout.Stack(num_stacks=2),
-    layout.Tile(ratio=0.25),
+    layout.MonadTall(),
 ]
 
 widget_defaults = dict(
