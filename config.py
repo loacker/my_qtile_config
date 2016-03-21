@@ -51,6 +51,9 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen()),
 
     # This should be usefull when floating windows get buried
+    # Select floating window
+    Key([alt], "Tab", lazy.group.next_window()),
+    # Bring to front the buried window
     Key([alt], "grave", lazy.window.bring_to_front()),
 
     # Toggle between split and unsplit sides of stack.
