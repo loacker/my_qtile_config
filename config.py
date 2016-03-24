@@ -26,23 +26,19 @@ keys = [
     Key([mod], "o", lazy.layout.shrink()),
     Key([mod, "shift"], "space", lazy.layout.flip()),
 
-    # Move windows up or down in current stack
-    Key([mod, "shift"], "k", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_up()),
+    # Decrease ratio of current window
+    Key([mod, "shift"], "l", lazy.layout.decrease_ratio()),
 
-    # Move windows from stack to stack
-    #Key([mod, "shift"], "l", lazy.layout.client_to_next()),
-    #Key([mod, "shift"], "h", lazy.layout.client_to_previous()),
+    # Increase ratio of current window
+    Key([mod, "shift"], "h", lazy.layout.increase_ratio()),
+
+    # Stack layout
+    Key([mod, alt], "j", lazy.layout.client_to_next()),
+    Key([mod, alt], "k", lazy.layout.client_to_previous()),
 
     # Vertical and MonadTall layout
     Key([mod], 'm', lazy.layout.maximize()),
     Key([mod], 'n', lazy.layout.normalize()),
-
-    # Switch window focus to other pane(s) of stack
-    Key([mod], "space", lazy.layout.next()),
-
-    # Swap panes of split stack
-    Key([mod, "shift"], "space", lazy.layout.rotate()),
 
     # Toggle floating
     Key([mod], "t", lazy.window.toggle_floating()),
@@ -60,7 +56,7 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
+    Key([mod], "space", lazy.layout.toggle_split()),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -79,12 +75,6 @@ keys = [
     Key([mod, alt], "Tab", lazy.window.to_next_screen()),  # Don't work
     Key([mod, alt], "1", lazy.to_screen(0), lazy.group.toscreen(0)),
     Key([mod, alt], "2", lazy.to_screen(1), lazy.group.toscreen(1)),
-
-    # Decrease ratio of current window
-    Key([mod, "shift"], "l", lazy.layout.decrease_ratio()),
-
-    # Increase ratio of current window
-    Key([mod, "shift"], "h", lazy.layout.increase_ratio()),
 
     # Spin up applications
     Key([mod], "Return", lazy.spawn("urxvt")),
@@ -133,7 +123,7 @@ for i in groups:
 layouts = [
     layout.Max(),
     layout.VerticalTile(),
-    layout.Stack(num_stacks=2),
+    layout.Stack(num_stacks=3),
     layout.MonadTall(),
 ]
 
@@ -281,4 +271,4 @@ auto_fullscreen = True
 wmname = "LG3D"
 
 
-# vim: set ts=8 sw=4 sts=4 tw=79 ff=unix ft=python et ai :
+# vim: set ts=8 sw=4 sts=4 ff=unix ft=python et ai :
