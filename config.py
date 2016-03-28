@@ -143,6 +143,8 @@ screens = [
                 widget.Prompt(),
                 widget.Systray(),
                 widget.Sep(),
+                widget.Mpd(reconnect=True),
+                widget.Sep(),
                 widget.Volume(),
                 widget.Sep(),
                 widget.Backlight(backlight_name='intel_backlight'),
@@ -160,14 +162,19 @@ screens = [
                 widget.CurrentLayout(),
                 widget.Spacer(),
                 widget.Sep(),
+                widget.DF(partition='/', visible_on_warn=False, measure='M'),
+                widget.DF(partition='/usr', visible_on_warn=False, measure='M'),
+                widget.DF(partition='/var', visible_on_warn=False),
                 widget.DF(partition='/home', visible_on_warn=False),
+                widget.DF(partition='/home/shared', visible_on_warn=False),
                 widget.Sep(),
                 widget.TextBox('eth0:'),
                 widget.Net(interface='eth0'),
+                #widget.NetGraph(interface='eth0'),
                 widget.Sep(),
                 widget.TextBox('wlan0:'),
                 widget.Net(interface='wlan0'),
-                #widget.NetGraph(),
+                #widget.NetGraph(interface='wlan0'),
                 widget.Sep(),
                 widget.TextBox('sda:'),
                 widget.HDDBusyGraph(device='sda'),
@@ -191,6 +198,8 @@ screens = [
                 widget.Prompt(),
                 widget.Systray(),
                 widget.Sep(),
+                widget.Mpd(reconnect=True),
+                widget.Sep(),
                 widget.Volume(),
                 widget.Sep(),
                 widget.Backlight(backlight_name='intel_backlight'),
@@ -208,14 +217,19 @@ screens = [
                 widget.CurrentLayout(),
                 widget.Spacer(),
                 widget.Sep(),
+                widget.DF(partition='/', visible_on_warn=False, measure='M'),
+                widget.DF(partition='/usr', visible_on_warn=False, measure='M'),
+                widget.DF(partition='/var', visible_on_warn=False),
                 widget.DF(partition='/home', visible_on_warn=False),
+                widget.DF(partition='/home/shared', visible_on_warn=False),
                 widget.Sep(),
                 widget.TextBox('eth0:'),
                 widget.Net(interface='eth0'),
+                #widget.NetGraph(interface='eth0'),
                 widget.Sep(),
                 widget.TextBox('wlan0:'),
                 widget.Net(interface='wlan0'),
-                #widget.NetGraph(),
+                #widget.NetGraph(interface='wlan0'),
                 widget.Sep(),
                 widget.TextBox('sda:'),
                 widget.HDDBusyGraph(device='sda'),
@@ -260,9 +274,13 @@ def autostart():
     subprocess.call([home + '/.config/qtile/autostart.sh'])
 
 
+main = None
+#def main(qtile):
+#    qtile.cmd_debug()
+
+
 dgroups_key_binder = None
 dgroups_app_rules = []
-main = None
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False

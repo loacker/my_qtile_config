@@ -12,4 +12,3 @@ xmodmap ${HOME}/.Xmodmap
 /usr/bin/thunderbird-bin &
 /usr/bin/redshift-gtk -l 52.38:4.83 -t 5700:3600 -g 0.8 -m randr -v &
 
-conky -d
