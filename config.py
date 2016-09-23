@@ -1,4 +1,4 @@
-# Copyright (c) 2015 Matteo Piccinini [l0aCk3r]
+# Copyleft (c) 2016 Matteo Piccinini [l0aCk3r]
 
 from libqtile.config import Key, Screen, Group, Drag, Click, hook, Match
 from libqtile.command import lazy
@@ -6,9 +6,13 @@ from libqtile import layout, bar, widget
 import os
 import subprocess
 
+
 mod = "mod4"
 alt = "mod1"
 printkey = "Print"
+shift = "shift"
+control = "control"
+
 
 keys = [
     # Switch between windows in current stack pane
@@ -18,19 +22,19 @@ keys = [
     Key([mod], "l", lazy.layout.next()),
 
     # MonadTall layout
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "h", lazy.layout.swap_left()),
-    Key([mod, "shift"], "l", lazy.layout.swap_right()),
+    Key([mod, shift], "k", lazy.layout.shuffle_up()),
+    Key([mod, shift], "j", lazy.layout.shuffle_down()),
+    Key([mod, shift], "h", lazy.layout.swap_left()),
+    Key([mod, shift], "l", lazy.layout.swap_right()),
     Key([mod], "i", lazy.layout.grow()),
     Key([mod], "o", lazy.layout.shrink()),
-    Key([mod, "shift"], "space", lazy.layout.flip()),
+    Key([mod, shift], "space", lazy.layout.flip()),
 
     # Decrease ratio of current window
-    Key([mod, "shift"], "l", lazy.layout.decrease_ratio()),
+    Key([mod, shift], "l", lazy.layout.decrease_ratio()),
 
     # Increase ratio of current window
-    Key([mod, "shift"], "h", lazy.layout.increase_ratio()),
+    Key([mod, shift], "h", lazy.layout.increase_ratio()),
 
     # Stack layout
     Key([mod, alt], "j", lazy.layout.client_to_next()),
@@ -65,8 +69,8 @@ keys = [
     Key([mod], "w", lazy.window.kill()),
 
     # Restart or shutdown qtile
-    Key([mod, "control"], "r", lazy.restart()),
-    Key([mod, "control"], "q", lazy.shutdown()),
+    Key([mod, control], "r", lazy.restart()),
+    Key([mod, control], "q", lazy.shutdown()),
 
     # Run command
     Key([mod], "r", lazy.spawncmd()),
@@ -80,14 +84,13 @@ keys = [
     Key([mod], "Return", lazy.spawn("urxvt")),
     Key([alt], "c", lazy.spawn("urxvt -e weechat-curses")),
     Key([alt], "d", lazy.spawn("firefox-bin")),
-    Key([alt], "g", lazy.spawn("chromium")),
+    Key([alt], "g", lazy.spawn("chromium -disable-prompt-on-repost")),
     Key([alt], "s", lazy.spawn("skype")),
     Key([alt], "m", lazy.spawn("thunderbird-bin")),
     Key([alt], printkey, lazy.spawn("scrot -sb '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_selection.png' -e 'mv $f ~/pictures/screenshots'")),
     Key([mod], printkey, lazy.spawn("scrot -ub '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_window.png' -e 'mv $f ~/pictures/screenshots'")),
 ]
 
-#groups = [Group(i) for i in "123456890"]
 
 # Use "xprop WM_CLASS" command to retrieve the wm_class attribute of a window
 groups = [
@@ -98,7 +101,8 @@ groups = [
         Match(wm_class=["chromium-browser-chromium"])]),
     Group("3", matches=[
         Match(wm_class=["Thunderbird"]),
-        Match(wm_class=["Skype"])]),
+        Match(wm_class=["Skype"]),
+        Match(wm_class=["telegram"])]),
     Group("4"),
     Group("5"),
     Group("6"),
@@ -109,16 +113,13 @@ groups = [
         Match(wm_class=["rdesktop"])]),
 ]
 
+
 for i in groups:
     # mod1 + number of group = switch to group
-    keys.append(
-        Key([mod], i.name, lazy.group[i.name].toscreen())
-    )
-
+    keys.append(Key([mod], i.name, lazy.group[i.name].toscreen()))
     # mod1 + shift + number of group = switch to & move focused window to group
-    keys.append(
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
-    )
+    keys.append(Key([mod, shift], i.name, lazy.window.togroup(i.name)))
+
 
 layouts = [
     layout.Max(),
@@ -127,11 +128,13 @@ layouts = [
     layout.MonadTall(),
 ]
 
+
 widget_defaults = dict(
     font='Andale',
     fontsize=12,
     padding=3,
 )
+
 
 screens = [
     Screen(
@@ -163,18 +166,17 @@ screens = [
                 widget.Spacer(),
                 widget.Sep(),
                 widget.DF(partition='/', visible_on_warn=False, measure='M'),
-                widget.DF(partition='/usr', visible_on_warn=False, measure='M'),
+                widget.DF(partition='/usr', visible_on_warn=False),
                 widget.DF(partition='/var', visible_on_warn=False),
+                widget.DF(partition='/opt', visible_on_warn=False),
                 widget.DF(partition='/home', visible_on_warn=False),
                 widget.DF(partition='/home/shared', visible_on_warn=False),
                 widget.Sep(),
                 widget.TextBox('eth0:'),
                 widget.Net(interface='eth0'),
-                #widget.NetGraph(interface='eth0'),
                 widget.Sep(),
                 widget.TextBox('wlan0:'),
                 widget.Net(interface='wlan0'),
-                #widget.NetGraph(interface='wlan0'),
                 widget.Sep(),
                 widget.TextBox('sda:'),
                 widget.HDDBusyGraph(device='sda'),
@@ -218,18 +220,17 @@ screens = [
                 widget.Spacer(),
                 widget.Sep(),
                 widget.DF(partition='/', visible_on_warn=False, measure='M'),
-                widget.DF(partition='/usr', visible_on_warn=False, measure='M'),
+                widget.DF(partition='/usr', visible_on_warn=False),
                 widget.DF(partition='/var', visible_on_warn=False),
+                widget.DF(partition='/opt', visible_on_warn=False),
                 widget.DF(partition='/home', visible_on_warn=False),
                 widget.DF(partition='/home/shared', visible_on_warn=False),
                 widget.Sep(),
                 widget.TextBox('eth0:'),
                 widget.Net(interface='eth0'),
-                #widget.NetGraph(interface='eth0'),
                 widget.Sep(),
                 widget.TextBox('wlan0:'),
                 widget.Net(interface='wlan0'),
-                #widget.NetGraph(interface='wlan0'),
                 widget.Sep(),
                 widget.TextBox('sda:'),
                 widget.HDDBusyGraph(device='sda'),
@@ -245,6 +246,7 @@ screens = [
         ),
     ),
 ]
+
 
 # Drag floating layouts.
 mouse = [
@@ -274,11 +276,6 @@ def autostart():
     subprocess.call([home + '/.config/qtile/autostart.sh'])
 
 
-main = None
-#def main(qtile):
-#    qtile.cmd_debug()
-
-
 dgroups_key_binder = None
 dgroups_app_rules = []
 follow_mouse_focus = True
@@ -287,6 +284,10 @@ cursor_warp = False
 floating_layout = layout.Floating()
 auto_fullscreen = True
 wmname = "LG3D"
+
+main = None
+#def main(qtile):
+#    qtile.cmd_debug()
 
 
 # vim: set ts=8 sw=4 sts=4 ff=unix ft=python et ai :

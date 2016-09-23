@@ -8,7 +8,8 @@ xmodmap ${HOME}/.Xmodmap
 /usr/bin/urxvt -e screen -R -D &
 /usr/bin/firefox-bin &
 /usr/bin/chromium &
-/opt/bin/skype &
+#/opt/bin/skype &
+/opt/bin/telegram &
 /usr/bin/thunderbird-bin &
 /usr/bin/redshift-gtk -l 52.38:4.83 -t 5700:3600 -g 0.8 -m randr -v &
 
