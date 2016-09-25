@@ -6,8 +6,9 @@ xmodmap ${HOME}/.Xmodmap
 #${HOME}/bin/runonce "$(which xscreensaver) -no-splash"
 
 /usr/bin/urxvt -e screen -R -D &
+/usr/bin/urxvt -e weechat-curses &
 /usr/bin/firefox-bin &
-/usr/bin/chromium &
+/usr/bin/chromium-browser -disable-prompt-on-repost &
 #/opt/bin/skype &
 /opt/bin/telegram &
 /usr/bin/thunderbird-bin &
