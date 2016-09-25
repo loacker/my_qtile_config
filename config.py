@@ -83,11 +83,11 @@ keys = [
     # Spin up applications
     Key([mod], "Return", lazy.spawn("urxvt")),
     Key([alt], "c", lazy.spawn("urxvt -e weechat-curses")),
-    Key([alt], "d", lazy.spawn("firefox-bin")),
+    Key([alt], "d", lazy.spawn("firefox")),
     Key([alt], "g", lazy.spawn("chromium-browser -disable-prompt-on-repost")),
     Key([alt], "s", lazy.spawn("skype")),
     Key([alt], "t", lazy.spawn("telegram")),
-    Key([alt], "m", lazy.spawn("thunderbird-bin")),
+    Key([alt], "m", lazy.spawn("thunderbird")),
     Key([alt], printkey, lazy.spawn("scrot -sb '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_selection.png' -e 'mv $f ~/pictures/screenshots'")),
     Key([mod], printkey, lazy.spawn("scrot -ub '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_window.png' -e 'mv $f ~/pictures/screenshots'")),
 ]
