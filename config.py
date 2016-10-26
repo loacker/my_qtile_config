@@ -88,6 +88,7 @@ keys = [
     Key([alt], "s", lazy.spawn("skype")),
     Key([alt], "t", lazy.spawn("telegram")),
     Key([alt], "m", lazy.spawn("thunderbird")),
+    Key([alt], "p", lazy.spawn("pavucontrol")),
     Key([alt], printkey, lazy.spawn("scrot -sb '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_selection.png' -e 'mv $f ~/pictures/screenshots'")),
     Key([mod], printkey, lazy.spawn("scrot -ub '%d-%m-%Y_%H-%M-%S_$wx$h_scrot_window.png' -e 'mv $f ~/pictures/screenshots'")),
 ]
@@ -104,7 +105,8 @@ groups = [
         Match(wm_class=["Thunderbird"]),
         Match(wm_class=["Skype"]),
         Match(wm_class=["telegram"])]),
-    Group("4"),
+    Group("4", matches=[
+        Match(wm_class=["Pavucontrol"])]),
     Group("5"),
     Group("6"),
     Group("7"),
