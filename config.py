@@ -37,8 +37,9 @@ keys = [
     Key([mod, shift], "h", lazy.layout.increase_ratio()),
 
     # Stack layout
-    Key([mod, alt], "j", lazy.layout.client_to_next()),
-    Key([mod, alt], "k", lazy.layout.client_to_previous()),
+    Key([mod, shift], "j", lazy.layout.client_to_next()),
+    Key([mod, shift], "k", lazy.layout.client_to_previous()),
+    Key([mod], "a", lazy.layout.add()),
 
     # Vertical and MonadTall layout
     Key([mod], 'm', lazy.layout.maximize()),
@@ -102,10 +103,10 @@ groups = [
         Match(wm_class=["Firefox"]),
         Match(wm_class=["chromium-browser-chromium"])]),
     Group("3", matches=[
-        Match(wm_class=["Thunderbird"]),
         Match(wm_class=["Skype"]),
         Match(wm_class=["telegram"])]),
     Group("4", matches=[
+        Match(wm_class=["Thunderbird"]),
         Match(wm_class=["Pavucontrol"])]),
     Group("5"),
     Group("6"),
@@ -127,7 +128,7 @@ for i in groups:
 layouts = [
     layout.Max(),
     layout.VerticalTile(),
-    layout.Stack(num_stacks=3),
+    layout.Stack(num_stacks=2),
     layout.MonadTall(),
 ]
 
