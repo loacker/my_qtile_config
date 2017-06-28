@@ -30,16 +30,11 @@ keys = [
     Key([mod], "o", lazy.layout.shrink()),
     Key([mod, shift], "space", lazy.layout.flip()),
 
-    # Decrease ratio of current window
-    Key([mod, shift], "l", lazy.layout.decrease_ratio()),
-
-    # Increase ratio of current window
-    Key([mod, shift], "h", lazy.layout.increase_ratio()),
-
     # Stack layout
     Key([mod, shift], "j", lazy.layout.client_to_next()),
     Key([mod, shift], "k", lazy.layout.client_to_previous()),
     Key([mod], "a", lazy.layout.add()),
+    Key([mod], "d", lazy.layout.delete()),
 
     # Vertical and MonadTall layout
     Key([mod], 'm', lazy.layout.maximize()),
